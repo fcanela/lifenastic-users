@@ -1,0 +1,45 @@
+{
+  "name": "lifenastic-users",
+  "version": "0.0.0",
+  "description": "Users handler microservice for Lifenastic",
+  "main": "src/service.js",
+  "scripts": {
+    "lint": "eslint -c .eslint src/* db/*",
+    "test": "npm run lint && npm run test:unit && npm run test:integration",
+    "test:unit": "mocha tests/unit/*.test.js",
+    "test:unit:watch": "mocha -w tests/unit/*.test.js",
+    "test:integration": "mocha tests/integration/*.test.js",
+    "test:integration:watch": "mocha -w tests/integration/*.test.js",
+    "db:migrate": "knex --knexfile db/config.js migrate:latest",
+    "db:rollback": "knex --knexfile db/config.js migrate:rollback"
+  },
+  "author": "fcanela",
+  "license": "MIT",
+  "dependencies": {
+    "knex": "^0.12.1",
+    "lodash": "^4.16.2",
+    "pg": "^6.1.0",
+    "seneca": "^3.1.0"
+  },
+  "devDependencies": {
+    "dotenv": "^2.0.0",
+    "eslint": "^3.6.0",
+    "mocha": "^3.0.2"
+  },
+  "directories": {
+    "test": "tests"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fcanela/lifenastic-users.git"
+  },
+  "keywords": [
+    "lifenastic",
+    "microservice",
+    "users"
+  ],
+  "bugs": {
+    "url": "https://github.com/fcanela/lifenastic-users/issues"
+  },
+  "homepage": "https://github.com/fcanela/lifenastic-users#readme"
+}

@@ -1,0 +1,6 @@
+.env
+.vagrant
+node_modules
+ansible/*.retry
+*.log
+**/*.log

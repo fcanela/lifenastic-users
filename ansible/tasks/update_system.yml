@@ -1,0 +1,4 @@
+- name: APT | Updating cache packages
+  apt: update_cache=yes
+- name: APT | Upgrading system
+  apt: upgrade=yes
