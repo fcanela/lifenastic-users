@@ -14,5 +14,3 @@ command.handler = function listUsers(msg, deps, respond) {
         respond(null, users);
     }).catch(respond);
 };
-
-

@@ -9,7 +9,7 @@ exports.seed = function(knex, Promise) {
             const promises = [];
 
             insert({
-                id: 1, email: 'user@example.com',
+                id: 1, email: 'test@email.example',
                 hash: '$2a$10$KssILxWNR6k62B7yiX0GAe2Q7wwHlrzhF3LqtVvpyvHZf0MwvNfVu'
             });
 

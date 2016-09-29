@@ -20,7 +20,7 @@ deps.models.Users.find = function() {
         });
     }
 
-    add('test@email.example', 'randomhash');
+    add('test@email.example', 'validhash');
     add('test2@email.example', 'anotherhash');
 
     return Promise.resolve(result);
