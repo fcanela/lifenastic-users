@@ -1,19 +1,15 @@
 language: node_js
 node_js:
     - "6"
-service:
+services:
     - postgresql
 install:
     - npm install
 before_script:
+    # Create a database
     - psql -c 'create database users;' -U postgres
 script:
+    # Install the schema
     - npm run db:migrate
-    - npm test
 env:
-    - NODE_ENV=production
-    - POSTGRESQL_HOST=localhost
-    - POSTGRESQL_PORT=5432
-    - POSTGRESQL_USER=postgres
-    - POSTGRESQL_PASSWORD=""
-    - POSTGRESQL_DATABASE=users
+    - NODE_ENV=production POSTGRESQL_HOST=localhost POSTGRESQL_PORT=5432 POSTGRESQL_USER=postgres POSTGRESQL_PASSWORD="" POSTGRESQL_DATABASE=users
