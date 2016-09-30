@@ -11,5 +11,7 @@ before_script:
 script:
     # Install the schema
     - npm run db:migrate
+    # Test
+    - npm test
 env:
     - NODE_ENV=production POSTGRESQL_HOST=localhost POSTGRESQL_PORT=5432 POSTGRESQL_USER=postgres POSTGRESQL_PASSWORD="" POSTGRESQL_DATABASE=users
