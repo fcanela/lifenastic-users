@@ -7,5 +7,6 @@ resource.role = 'users';
 
 resource.commands = [
     require('./users.list'),
-    require('./users.authenticate')
+    require('./users.authenticate'),
+    require('./users.create')
 ];

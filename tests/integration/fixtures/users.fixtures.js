@@ -9,7 +9,12 @@ exports.seed = function(knex, Promise) {
             const promises = [];
 
             insert({
-                id: 1, email: 'test@email.example',
+                email: 'test@email.example',
+                hash: '$2a$10$KssILxWNR6k62B7yiX0GAe2Q7wwHlrzhF3LqtVvpyvHZf0MwvNfVu'
+            });
+
+            insert({
+                email: 'existing@email.example',
                 hash: '$2a$10$KssILxWNR6k62B7yiX0GAe2Q7wwHlrzhF3LqtVvpyvHZf0MwvNfVu'
             });
 
@@ -17,7 +22,6 @@ exports.seed = function(knex, Promise) {
 
             function insert(value) {
                 const now = (new Date()).toISOString();
-                value.lastAccess = now;
                 value.createdAt = now;
                 value.updatedAt = now;
                 promises.push(knex(tableName).insert(value));
