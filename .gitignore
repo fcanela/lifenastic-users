@@ -1,5 +1,6 @@
 .env
 .vagrant
+.coveralls.yml
 node_modules
 coverage
 ansible/*.retry

@@ -22,9 +22,10 @@
     "lodash": "^4.16.2",
     "pg": "^6.1.0",
     "seneca": "^3.1.0",
-    "seneca-amqp-transport": "^1.0.1"
+    "seneca-amqp-transport": "^2.0.0"
   },
   "devDependencies": {
+    "coveralls": "^2.11.14",
     "dotenv": "^2.0.0",
     "eslint": "^3.6.0",
     "istanbul": "^0.4.5",

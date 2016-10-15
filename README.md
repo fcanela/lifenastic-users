@@ -2,6 +2,7 @@
 
 [![npm version][npmsemver-image]][npmsemver-url]
 [![Build Status][ci-image]][ci-url]
+[![Coverage Status][cv-image]][cv-url]
 [![Code Climate][cq-image]][cq-url]
 [![Dependencies][deps-image]][deps-url]
 [![Dev Dependencies][dev-deps-image]][dev-deps-url]
@@ -117,6 +118,8 @@ Do not expect a working or stable version until 1.0.0 version is reached.
 [npmsemver-url]: https://github.com/fcanela/lifenastic-users
 [ci-image]: https://travis-ci.org/fcanela/lifenastic-users.svg?branch=master
 [ci-url]: https://travis-ci.org/fcanela/lifenastic-users
+[cv-image]: https://coveralls.io/repos/github/fcanela/lifenastic-users/badge.svg?branch=master
+[cv-url]: https://coveralls.io/github/fcanela/lifenastic-users?branch=master
 [cq-image]: https://codeclimate.com/github/fcanela/lifenastic-users/badges/gpa.svg
 [cq-url]: https://codeclimate.com/github/fcanela/lifenastic-users
 [deps-image]: https://david-dm.org/fcanela/lifenastic-users.svg
