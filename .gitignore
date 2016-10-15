@@ -1,6 +1,7 @@
 .env
 .vagrant
 node_modules
+coverage
 ansible/*.retry
 *.log
 **/*.log

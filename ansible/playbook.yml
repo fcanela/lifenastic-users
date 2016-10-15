@@ -2,26 +2,43 @@
 - hosts: sandbox
   become: yes
   roles:
-    - role: nodesource.node
-      nodejs_version: '6'
-      debian_repo_version: '6.x'
+      - role: nodesource.node
+        nodejs_version: '6'
+        debian_repo_version: '6.x'
+
 - hosts: db
   become: yes
   roles:
-    - role: ANXS.postgresql
-      postgresql_version: 9.4
-      postgresql_databases:
-        - name: users
-          owner: users
-      postgresql_users:
-        - name: users
-          pass: 'dfE2wWWyshY4SRTarZFe8t'
-          encrypted: no
-      postgresql_user_privileges:
-        - name: users
-          db: users
-          priv: 'ALL'
-      postgresql_listen_addresses:
-        - '0.0.0.0'
-      postgresql_pg_hba_custom:
-        - { type: host, database: all, user: all, address: '10.20.1.0/24', method: 'trust'}
+      - role: ANXS.postgresql
+        postgresql_version: 9.4
+        postgresql_databases:
+            - name: users
+        owner: users
+        postgresql_users:
+            - name: users
+        pass: 'dfE2wWWyshY4SRTarZFe8t'
+        encrypted: no
+        postgresql_user_privileges:
+            - name: users
+        db: users
+        priv: 'ALL'
+        postgresql_listen_addresses:
+            - '0.0.0.0'
+        postgresql_pg_hba_custom:
+            - { type: host, database: all, user: all, address: '10.20.1.0/24', method: 'trust'}
+
+- hosts: rabbitmq
+  become: yes
+  roles:
+      - role: Stouts.rabbitmq
+        rabbitmq_enabled: true
+        rabbitmq_users:
+            - user: lifenastic
+              password: y4FrA6cZkwNm9YUeuwtqjv
+              vhost: /
+              configure_priv: .*
+              read_priv: .*
+              write_priv: .*
+              tags: administrator
+        rabbitmq_plugins:
+            - rabbitmq_management

@@ -29,4 +29,10 @@ Vagrant.configure(2) do |config|
     node.vm.network "private_network", ip: "10.20.1.2"
     node.vm.synced_folder ".", "/vagrant", disabled: true
   end
+
+  config.vm.define "rabbitmq" do |node|
+    node.vm.hostname = "rabbitmq"
+    node.vm.network "private_network", ip: "10.20.1.3"
+    node.vm.synced_folder ".", "/vagrant", disabled: true
+  end
 end

@@ -1,17 +1,33 @@
 'use strict';
 
 const assert = require('assert');
-const service = require('../../src/service.js');
 const installFixtures = require('./helpers/install_fixtures');
+const includesErrorCode = require('../helpers/includes_error_code');
 
 describe('User module authenticate command', () => {
-    beforeEach(function prepareTestingContext(done) {
-        installFixtures().then(() => {
+    let testEnv;
+    let client;
+    before(function prepareTestingContext(done) {
+        const TestEnviroment = require('./helpers/create_service_client.js');
+        testEnv = new TestEnviroment();
+        testEnv.start(function settingUpVars(err, createdClient) {
+            if (err) return done(err);
+            client = createdClient;
             done();
-        }, done);;
+        });
     });
 
-    it('should authenticate users', (done) => {
+    after(function cleanUp(done) {
+        testEnv.stop(done);
+    });
+
+    beforeEach(function prepareTest(done) {
+        installFixtures().then(() => {
+            done();
+        }, done);
+    });
+
+    it('should authenticate users', function(done) {
         const msg = {
             role: 'users',
             cmd: 'authenticate',
@@ -19,31 +35,33 @@ describe('User module authenticate command', () => {
             hash: '$2a$10$KssILxWNR6k62B7yiX0GAe2Q7wwHlrzhF3LqtVvpyvHZf0MwvNfVu'
         };
 
-        service.act(msg, (err, reply) => {
+        client.act(msg, (err, reply) => {
             if (err) return done(err);
-            if (reply.error) return done(reply.error);
+            if (reply.errors.length > 0) return done(new Error(JSON.stringify(reply.errors)));
 
             const result = reply.authenticated;
-            assert.strictEqual(result, true, 'user is correctly authenticated');
+            assert.strictEqual(result, true, 'rejected valid credentials');
 
             done();
         });
     });
 
-    it('should not authenticate with invalid credentials ', (done) => {
+    it('should not authenticate with invalid password', (done) => {
         const msg = {
             role: 'users',
             cmd: 'authenticate',
             email: 'test@email.example',
-            hash: 'randominvalidtoken'
+            hash: 'randominvalidhash'
         };
 
-        service.act(msg, (err, reply) => {
+        client.act(msg, (err, reply) => {
             if (err) return done(err);
-            if (reply.error) return done(reply.error);
+
+            assert.notStrictEqual(reply.errors.length, 0, 'returned no errors');
+            assert.ok(includesErrorCode(reply, 'InvalidPassword'), 'InvalidPassword error not returned');
 
             const result = reply.authenticated;
-            assert.strictEqual(result, false, 'invalid credentials are not authenticated');
+            assert.strictEqual(result, false, 'accepted invalid credentials');
 
             done();
         });

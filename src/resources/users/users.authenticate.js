@@ -14,14 +14,28 @@ command.handler = function authenticateUser(msg, deps, respond) {
     models.Users.find(query).then(function returnResult(results) {
         if (results.length > 1) return tooManyResultsError();
 
+        const errors = [];
         // If the user is not in the DB it returns "no authenticated"
         let authenticated = false;
-        if (results.length === 0) return respond(null, { authenticated });
+        if (results.length === 0) {
+            errors.push({
+                code: 'UserNotFound',
+                message: 'Invalid credentials'
+            });
+            return respond(null, { errors, authenticated });
+        }
 
         const user = results[0];
 
         authenticated = credentials.hash === user.hash;
-        respond(null, { authenticated });
+        if (!authenticated) {
+            errors.push({
+                code: 'InvalidPassword',
+                message: 'Invalid credentials'
+            });
+        }
+
+        respond(null, { errors, authenticated });
 
         function tooManyResultsError() {
             const err = new Error('Authentication obtained more than'

@@ -3,6 +3,7 @@ node_js:
     - "6"
 services:
     - postgresql
+    - rabbitmq
 install:
     - npm install
 before_script:
@@ -13,5 +14,8 @@ script:
     - npm run db:migrate
     # Test
     - npm test
+after_script:
+    - istanbul cover ./node_modules/mocha/bin/_mocha tests/**/*.test.js
+    - cat ./coverage/lcov.info | ./node_modules/coveralls.js
 env:
-    - NODE_ENV=testing POSTGRESQL_HOST=localhost POSTGRESQL_PORT=5432 POSTGRESQL_USER=postgres POSTGRESQL_PASSWORD="" POSTGRESQL_DATABASE=users
+    - NODE_ENV=testing POSTGRESQL_HOST=localhost POSTGRESQL_PORT=5432 POSTGRESQL_USER=postgres POSTGRESQL_PASSWORD="" POSTGRESQL_DATABASE=users RABBITMQ_VHOST=/ RABBITMQ_USERNAME=guest RABBITMQ_PASSWORD=guest

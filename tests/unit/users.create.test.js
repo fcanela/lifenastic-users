@@ -4,6 +4,7 @@ const assert = require('assert');
 
 const usersResPath = '../../src/resources/users/';
 const depsMock = require('./users.create.mocks');
+const includesErrorCode = require('../helpers/includes_error_code');
 const handler = require(usersResPath + 'users.create').handler;
 
 describe('User module create handler', () => {
@@ -14,9 +15,9 @@ describe('User module create handler', () => {
         };
         handler(newUser, depsMock, (err, reply) => {
             if (err) return done (err);
-            if (reply.error) return done(reply.error);
 
-            assert(reply.id > 0, 'id field not returned');
+            assert.strictEqual(reply.errors.length, 0, 'returned errors');
+            assert(reply.user.id > 0, 'id field not returned');
             done();
         });
     });
@@ -28,8 +29,7 @@ describe('User module create handler', () => {
         handler(newUser, depsMock, (err, reply) => {
             if (err) return done (err);
             assert(reply.errors.length > 0, 'returned no errors with empty email');
-            const error = reply.errors[0];
-            assert.strictEqual(error.code, 'EmailRequired', 'failed to recognize missing email field');
+            assert.ok(includesErrorCode(reply, 'EmailRequired'), 'missing empty email field error');
 
             done();
         });
@@ -42,8 +42,7 @@ describe('User module create handler', () => {
         handler(newUser, depsMock, (err, reply) => {
             if (err) return done (err);
             assert(reply.errors.length > 0, 'returned no errors with empty hash');
-            const error = reply.errors[0];
-            assert.strictEqual(error.code, 'HashRequired', 'failed to recognize missing hash field');
+            assert.ok(includesErrorCode(reply, 'HashRequired'), 'missing empty hash field error');
 
             done();
         });
@@ -57,9 +56,8 @@ describe('User module create handler', () => {
         handler(newUser, depsMock, (err, reply) => {
             if (err) return done (err);
 
-            assert(reply.errors.length > 0, 'returned no errors with already registed email');
-            const error = reply.errors[0];
-            assert.strictEqual(error.code, 'EmailAlreadyRegistered', 'failed to detect an already registered email');
+            assert(reply.errors.length > 0, 'returned no errors with empty hash');
+            assert.ok(includesErrorCode(reply, 'EmailAlreadyRegistered'), 'failed to detect an already registered email');
             done();
         });
     });

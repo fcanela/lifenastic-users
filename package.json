@@ -2,16 +2,18 @@
   "name": "lifenastic-users",
   "version": "0.0.0",
   "description": "Users handler microservice for Lifenastic",
-  "main": "src/service.js",
+  "main": "src/index.js",
   "scripts": {
     "lint": "eslint -c .eslint src/* db/*",
-    "test": "npm run lint && npm run test:unit && npm run test:integration",
+    "test": "npm run lint && npm run test:unit && npm run test:integration && npm run test:coverage",
     "test:unit": "mocha tests/unit/*.test.js",
     "test:unit:watch": "mocha -w tests/unit/*.test.js",
     "test:integration": "mocha tests/integration/*.test.js",
     "test:integration:watch": "mocha -w tests/integration/*.test.js",
+    "test:coverage": "istanbul cover _mocha -- tests/**/*.test.js",
     "db:migrate": "knex --knexfile db/config.js migrate:latest",
-    "db:rollback": "knex --knexfile db/config.js migrate:rollback"
+    "db:rollback": "knex --knexfile db/config.js migrate:rollback",
+    "start": "node ./run.js"
   },
   "author": "fcanela",
   "license": "MIT",
@@ -19,12 +21,18 @@
     "knex": "^0.12.1",
     "lodash": "^4.16.2",
     "pg": "^6.1.0",
-    "seneca": "^3.1.0"
+    "seneca": "^3.1.0",
+    "seneca-amqp-transport": "^1.0.1"
   },
   "devDependencies": {
     "dotenv": "^2.0.0",
     "eslint": "^3.6.0",
-    "mocha": "^3.0.2"
+    "istanbul": "^0.4.5",
+    "mocha": "^3.0.2",
+    "mocha-lcov-reporter": "^1.2.0"
+  },
+  "engines": {
+    "node": ">=6.7.0"
   },
   "directories": {
     "test": "tests"

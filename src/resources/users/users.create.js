@@ -14,7 +14,8 @@ command.handler = function authenticateUser(msg, deps, respond) {
         return models.Users.create(newUser);
     })
     .then(function userCreated(user) {
-        respond(null, user);
+        const errors = [];
+        respond(null, { errors, user });
     })
     .catch(function(err) {
         if (err instanceof Error) return respond(err);
