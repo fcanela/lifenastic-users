@@ -18,4 +18,4 @@ after_script:
     - istanbul cover ./node_modules/mocha/bin/_mocha tests/**/*.test.js
     - cat ./coverage/lcov.info | ./node_modules/coveralls.js
 env:
-    - NODE_ENV=testing POSTGRESQL_HOST=localhost POSTGRESQL_PORT=5432 POSTGRESQL_USER=postgres POSTGRESQL_PASSWORD="" POSTGRESQL_DATABASE=users RABBITMQ_VHOST=/ RABBITMQ_USERNAME=guest RABBITMQ_PASSWORD=guest
+    - NODE_ENV=testing POSTGRESQL_HOST=localhost POSTGRESQL_PORT=5432 POSTGRESQL_USER=postgres POSTGRESQL_PASSWORD="" POSTGRESQL_DATABASE=users AMQP_HOST=localhost AMQP_PORT=5672 AMQP_VHOST=/ AMQP_USERNAME=guest AMQP_PASSWORD=guest
