@@ -53,7 +53,7 @@ Registers a new user
 **Request**
 
 Name | Type | Required | Description
--------------------------------------
+-----|------|----------|-------------
 email | string | yes | User email
 hash | string | yes | Password hash. Expected bcrypt format but can handle others
 
@@ -61,13 +61,13 @@ hash | string | yes | Password hash. Expected bcrypt format but can handle other
 **Response**
 
 Field | Type | Description
-----------------------------
+------|------|----------------
 id | integer | Unique user identifier
 
 **Errors**
 
 Code | Description
--------------------
+-----|--------------
 EmailRequired | No email field or empty one
 HashRequired | No hash field or empty one
 EmailAlreadyRegistered | The email have already a registered account
@@ -79,7 +79,7 @@ EmailAlreadyRegistered | The email have already a registered account
 Returns an array of objects with the following fields:
 
 Field | Type | Description
-----------------------------
+------|------|----------------
 id | integer | Unique user identifier
 email | string |
 createdAt | date | UTC format
@@ -91,7 +91,7 @@ updatedAt | date | UTC format
 **Request**
 
 Name | Type | Required | Description
--------------------------------------
+-----|------|----------|----------------
 email | string | yes | User email
 hash | string | yes | Password hash. Expected bcrypt format but can handle others
 
@@ -104,6 +104,6 @@ Returns a object with `authenticated` (boolean) field indicating whenever the cr
 The following errors could be raised during the process:
 
 Code | Description
--------------------
+-----|--------------
 UserNotFound | There is no user registered with the provided credentials
 InvalidPassword | User exists but hashes don't match

@@ -23,7 +23,7 @@
     * [Developing](#developing)
     * [Bug reports, feature requests and discussion](#contributing)
 * [License](#license)
-* [Frequently Asked Questions](#faq)2
+* [Frequently Asked Questions](#faq)
 
 
 ## <a name="introduction"></a> Introduction
@@ -46,20 +46,20 @@ The service currently performs:
 
 Clone the repository
 ```
-    git clone https://github.com/fcanela/lifenastic-users.git users-service
-    cd users-service
+git clone https://github.com/fcanela/lifenastic-users.git users-service
+cd users-service
 ```
 Install dependencies
 ```
-    npm install
+npm install
 ```
 Configure following configuration section
 ```
-    npm run db:migrate
+npm run db:migrate
 ```
 Follow the instructions defined in configuration section and run the service:
 ```
-    npm start
+npm start
 ```
 
 ## <a name="configuration"></a> Configuration
