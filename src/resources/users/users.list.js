@@ -11,6 +11,7 @@ command.handler = function listUsers(msg, deps, respond) {
             delete user.hash;
         });
 
-        respond(null, users);
+        const errors = [];
+        respond(null, { errors, users });
     }).catch(respond);
 };

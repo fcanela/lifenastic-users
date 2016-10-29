@@ -32,10 +32,13 @@ describe('User module list command', () => {
             cmd: 'list'
         };
 
-        client.act(msg, (err, list) => {
+        client.act(msg, (err, reply) => {
             if (err) return done(err);
-            assert.notEqual(list.length, 0, 'empty list returned');
-            const firstItem = list[0];
+            assert.strictEqual(reply.errors.length, 0, 'returned errors');
+
+            const users = reply.users;
+            assert.notEqual(users.length, 0, 'empty list returned');
+            const firstItem = users[0];
             assert.notStrictEqual(firstItem.id, undefined, 'unable to get first record');
             assert.strictEqual(firstItem.hash, undefined, 'users hash returned');
             done();

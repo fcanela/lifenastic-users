@@ -20,7 +20,7 @@ command.handler = function authenticateUser(msg, deps, respond) {
         if (results.length === 0) {
             errors.push({
                 code: 'UserNotFound',
-                message: 'Invalid credentials'
+                message: 'No registered user found with provided credentials'
             });
             return respond(null, { errors, authenticated });
         }

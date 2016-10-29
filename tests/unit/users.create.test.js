@@ -28,7 +28,7 @@ describe('User module create handler', () => {
         };
         handler(newUser, depsMock, (err, reply) => {
             if (err) return done (err);
-            assert(reply.errors.length > 0, 'returned no errors with empty email');
+            assert.notStrictEqual(reply.errors.length, 0, 'returned no errors with empty email');
             assert.ok(includesErrorCode(reply, 'EmailRequired'), 'missing empty email field error');
 
             done();
