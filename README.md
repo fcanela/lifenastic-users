@@ -27,26 +27,39 @@
 
 
 ## <a name="introduction"></a> Introduction
-TODO
+
+This is a simple microservice for handling users operations for Lifenastic.
+
+Lifenastic aims to store your personal data, perform Quantified Self analysis and try to improve your metrics.
 
 ## <a name="features"></a> Features
-TODO
+An updated list of features and their description can be found in `docs` directory.
+
+The service currently performs:
+* User registration
+* Credentials authentication
+* Users listing
 
 ## <a name="installation"></a> Installation
-TODO: Update when docker container is ready
+
+### Without Docker
 
 Clone the repository
 ```
-    git clone https://github.com/fcanela/lifenastic-users.git users-service
-    cd users-service
+git clone https://github.com/fcanela/lifenastic-users.git users-service
+cd users-service
 ```
 Install dependencies
 ```
-    npm install
+npm install
 ```
 Configure following configuration section
 ```
-    npm run db:migrate
+npm run db:migrate
+```
+Follow the instructions defined in configuration section and run the service:
+```
+npm start
 ```
 
 ## <a name="configuration"></a> Configuration
@@ -57,26 +70,31 @@ If `NODE_ENV` variable value is not `production` it loads `.env` file lines as e
 
 A `.env.example` file can be found as documentation. It is also filled with the values that the service need to be runnable under the provided Vagrant virtual machines, just copy it as `.env`.
 
+
 ## <a name="npm-tasks"></a> Useful npm tasks
 
 The module has some `npm` scripts which could be useful for developing purpose:
 
-* `npm start` is not implemented yet
+* `npm start` starts the service
 * `npm run db:migrate` installs the pending schemas to bring the database up to date
 * `npm run db:rollback` undo the last migration
-* `npm test` runs the linter and all the tests
+* `npm test` runs the linter, all the tests and gives test coverage statistics
 * `npm run test:unit` runs the unit testing. Using `npm run test:unit:watch` will watch for changes
-* `npm run test:unit` runs the integration testing. Using `npm run test:integration:watch` will watch for changes. Remember to set up the service dependencies and provide their connection settings as enviroment variables.
+* `npm run test:integration` runs the integration testing. Using `npm run test:integration:watch` will watch for changes. Remember to set up the service dependencies and provide their connection settings as enviroment variables.
+* `npm run test:coverage` show coverage statistics
 * `npm run lint` lints the code
 
 ## <a name="vagrant"></a> Vagrant enviroment
 
-Two virtual machines defined...
+The following virtual machines are defined in `Vagrantfile`:
 
-* `db` which contains a running PostgreSQL server
-* `sandbox` which contains NodeJS and a synced repository directory at `/repo`
+* `db` which contains a running PostgreSQL server listening at default port.
+* `rabbitmq` which contains a running RabbitMQ server listening at default port. Web management plugin is enabled at port 15672.
+* `sandbox` which contains NodeJS and a synced repository directory at `/repo`.
 
-If you're not familiar with Vagrant this commands can be useful for you:
+Credentials are included in `.env.example`.
+
+If you're not familiar with Vagrant you may find the following commands handy:
 
 * Initialize your machines with `vagrant up --provision` the first time you start it. Installing the dependencies could take a while. Be patient.
 * `vagrant up` to bring up the virtual machines
