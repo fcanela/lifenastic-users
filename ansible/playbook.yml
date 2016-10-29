@@ -1,12 +1,12 @@
 ---
-- hosts: sandbox
+- hosts: service
   become: yes
   roles:
       - role: nodesource.node
         nodejs_version: '6'
         debian_repo_version: '6.x'
 
-- hosts: db
+- hosts: dependencies
   become: yes
   roles:
       - role: ANXS.postgresql
@@ -26,10 +26,6 @@
             - '0.0.0.0'
         postgresql_pg_hba_custom:
             - { type: host, database: all, user: all, address: '10.20.1.0/24', method: 'trust'}
-
-- hosts: rabbitmq
-  become: yes
-  roles:
       - role: Stouts.rabbitmq
         rabbitmq_enabled: true
         rabbitmq_users:

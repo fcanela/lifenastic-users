@@ -18,21 +18,15 @@ Vagrant.configure(2) do |config|
     # vb.customize ["modifyvm", :id, "--cpuexecutioncap", "50"]
   end
 
-  config.vm.define "sandbox" do |node|
-    node.vm.hostname = "sandbox"
-    node.vm.network "private_network", ip: "10.20.1.234"
+  config.vm.define "service" do |node|
+    node.vm.hostname = "service"
+    node.vm.network "private_network", ip: "10.20.1.100"
     node.vm.synced_folder ".", "/repo"
   end
 
-  config.vm.define "db" do |node|
-    node.vm.hostname = "db"
+  config.vm.define "dependencies" do |node|
+    node.vm.hostname = "dependencies"
     node.vm.network "private_network", ip: "10.20.1.2"
-    node.vm.synced_folder ".", "/vagrant", disabled: true
-  end
-
-  config.vm.define "rabbitmq" do |node|
-    node.vm.hostname = "rabbitmq"
-    node.vm.network "private_network", ip: "10.20.1.3"
     node.vm.synced_folder ".", "/vagrant", disabled: true
   end
 end

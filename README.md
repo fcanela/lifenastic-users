@@ -88,9 +88,12 @@ The module has some `npm` scripts which could be useful for developing purpose:
 
 The following virtual machines are defined in `Vagrantfile`:
 
-* `db` which contains a running PostgreSQL server listening at default port.
-* `rabbitmq` which contains a running RabbitMQ server listening at default port. Web management plugin is enabled at port 15672.
-* `sandbox` which contains NodeJS and a synced repository directory at `/repo`.
+* `service` which contains:
+    *  NodeJS
+    *  A synced repository directory at `/repo`.
+* `dependencies` which contains: 
+    * a running PostgreSQL server listening at default port.
+    * a running RabbitMQ server listening at default port. Web management plugin is enabled at port 15672.
 
 Credentials are included in `.env.example`.
 
@@ -98,7 +101,7 @@ If you're not familiar with Vagrant you may find the following commands handy:
 
 * Initialize your machines with `vagrant up --provision` the first time you start it. Installing the dependencies could take a while. Be patient.
 * `vagrant up` to bring up the virtual machines
-* `vagrant ssh sandbox` to automatically log in into `sandbox` virtual machine. `cd /repo` to access the synced folder.
+* `vagrant ssh service` to automatically log in into `service` virtual machine. `cd /repo` to access the synced folder.
 * `vagrant halt` to shut down your virtual machines and free their resources
 
 Be careful in multiusers hosts: this virtual machines have been configured to use the default SSH keypairs and can be accesed by anyone on localhost.
